@@ -1,0 +1,29 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+
+        <a href="/sessions">Switch to a new session</a>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+
+        <a>What's the character for: </a><br>
+        <a style="font-size:80px">{{ vocable }}</a>
+
+        <form action="/submit" method="post">
+            <input name="syllable" type="text" autofocus>
+            <input type="submit">
+        </form>
+    </body>
+</html>
