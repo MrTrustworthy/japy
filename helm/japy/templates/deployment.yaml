@@ -25,15 +25,15 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: COOKIE
-              value: {{ .Values.japyEnvironmentVariables.COOKIE }}
+              value: {{ .Values.japySecrets.COOKIE }}
             - name: DB_DBNAME
-              value: {{ .Values.japyEnvironmentVariables.DB_DBNAME }}
+              value: {{ .Values.japySecrets.DB_DBNAME }}
             - name: DB_HOST
-              value: {{ .Values.japyEnvironmentVariables.DB_HOST }}
+              value: {{ .Values.japySecrets.DB_HOST }}
             - name: DB_PASSWORD
-              value: {{ .Values.japyEnvironmentVariables.DB_PASSWORD }}
+              value: {{ .Values.japySecrets.DB_PASSWORD }}
             - name: DB_USER
-              value: {{ .Values.japyEnvironmentVariables.DB_USER }}
+              value: {{ .Values.japySecrets.DB_USER }}
           ports:
             - name: http
               containerPort: 3000
