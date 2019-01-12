@@ -12,7 +12,8 @@ branches:
 script:
   - docker build -t mrtrustworthy/japy:latest .
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
-  - docker push "$DOCKERHUB_USER"/japy:latest
+  - docker push "mrtrustworthy/japy:latest
+  - helm version
 
 
 install:
@@ -25,3 +26,6 @@ install:
   - mkdir ~/.kube
   - echo "$CLUSTER_CONFIG" | base64 -d > ~/.kube/config
 
+  - wget -O helm.tgz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.1-linux-amd64.tar.gz
+  - tar -zxvf helm.tgz
+  - mv linux-amd64/helm /usr/local/bin/helm
