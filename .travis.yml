@@ -10,22 +10,27 @@ branches:
     master
 
 install:
+  # Prepare K8s install
   - sudo apt-get update && sudo apt-get install -y apt-transport-https
   - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
   - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
+  # Prepare cloud SDK install
   - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
   - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
   - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
+  # Get K8s and cloud SDK
   - sudo apt-get update
   - sudo apt-get install -y kubectl google-cloud-sdk
 
+  # Set up K8s cluster config and auth
   - echo "$GCLOUD_SERVICE_AUTH" | base64 -d > service.json
   - gcloud auth activate-service-account "$GCLOUD_SERVICE_ACCOUNT" --key-file=service.json --project="$GCLOUD_PROJECT"
   - gcloud container clusters get-credentials "$GCLOUD_GKE_PROJECT" --zone europe-west3-b
   - kubectl config use-context "$CLUSTER_CONTEXT"
 
+  # Install helm
   - wget -O helm.tgz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.1-linux-amd64.tar.gz
   - tar -zxvf helm.tgz
   - sudo mv linux-amd64/helm /usr/local/bin/helm
