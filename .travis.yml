@@ -23,5 +23,5 @@ install:
   - sudo apt-get update
   - sudo apt-get install -y kubectl
   - mkdir ~/.kube
-  - echo "$CLUSTER_CONFIG" | base64 -D > ~/.kube/config
+  - echo "$CLUSTER_CONFIG" | base64 -d > ~/.kube/config
 
