@@ -21,8 +21,8 @@ install:
   - sudo apt-get update
   - sudo apt-get install -y kubectl google-cloud-sdk
 
-  - echo "$GCLOUD_SERVICE_AUTH" | base64 -d > ~/service.json
-  - gcloud auth activate-service-account "$GCLOUD_SERVICE_ACCOUNT" --key-file=~/service.json --project="$GCLOUD_PROJECT"
+  - echo "$GCLOUD_SERVICE_AUTH" | base64 -d > service.json
+  - gcloud auth activate-service-account "$GCLOUD_SERVICE_ACCOUNT" --key-file=service.json --project="$GCLOUD_PROJECT"
   - gcloud container clusters get-credentials "$GCLOUD_GKE_PROJECT"
   - kubectl config use-context "$CLUSTER_CONTEXT"
 
