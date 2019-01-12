@@ -23,7 +23,7 @@ install:
 
   - echo "$GCLOUD_SERVICE_AUTH" | base64 -d > service.json
   - gcloud auth activate-service-account "$GCLOUD_SERVICE_ACCOUNT" --key-file=service.json --project="$GCLOUD_PROJECT"
-  - gcloud container clusters get-credentials "$GCLOUD_GKE_PROJECT"
+  - gcloud container clusters get-credentials "$GCLOUD_GKE_PROJECT" --zone europe-west3-b
   - kubectl config use-context "$CLUSTER_CONTEXT"
 
   - wget -O helm.tgz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.1-linux-amd64.tar.gz
