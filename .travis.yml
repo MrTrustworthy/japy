@@ -27,9 +27,9 @@ install:
 
 
 script:
-  - docker build -t mrtrustworthy/japy:latest .
+  - docker build -t mrtrustworthy/japy:"$TRAVIS_BUILD_NUMBER" -t mrtrustworthy/japy:latest .
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
   - docker push mrtrustworthy/japy:"$TRAVIS_BUILD_NUMBER"
   - sudo helm version
-  - echo sudo helm upgrade --install japy . --set japySecrets.COOKIE="$COOKIE" --set japySecrets.DB_DBNAME="$DB_DBNAME" --set japySecrets.DB_HOST="$DB_HOST" --set japySecrets.DB_PASSWORD="$DB_PASSWORD" --set japySecrets.DB_USER="$DB_USER" --set image.tag="$TRAVIS_BUILD_NUMBER"
+  - sudo helm upgrade --install japy . --set japySecrets.COOKIE="$COOKIE" --set japySecrets.DB_DBNAME="$DB_DBNAME" --set japySecrets.DB_HOST="$DB_HOST" --set japySecrets.DB_PASSWORD="$DB_PASSWORD" --set japySecrets.DB_USER="$DB_USER" --set image.tag="$TRAVIS_BUILD_NUMBER"
 
