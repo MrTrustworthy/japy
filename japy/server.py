@@ -7,7 +7,7 @@ from japy.db_wrapper import ensure_tables, get_valid_vocables, make_new_session,
     get_vocables_for_session, add_log_entry, get_syllable_for_id, get_possible_session_configs, CharacterInfo
 
 app = Flask(__name__)
-app.secret_key = environ["cookie"]
+app.secret_key = environ["COOKIE"]
 ensure_tables()
 
 

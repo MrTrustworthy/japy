@@ -1,0 +1,30 @@
+# Default values for japy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mrtrustworthy/japy
+  tag: latest
+  pullPolicy: always
+
+japySecrets:
+  COOKIE: secure
+  DB_DBNAME: secure
+  DB_HOST: secure
+  DB_PASSWORD: secure
+  DB_USER: secure
+
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: LoadBalancer
+  clusterIp: 123
+  loadBalancerIp: 123
+  port: 80
+
+
+

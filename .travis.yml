@@ -1,4 +1,6 @@
 language: python
+dist: trusty
+sudo: true
 
 services:
   - docker
@@ -10,7 +12,16 @@ branches:
 script:
   - docker build -t mrtrustworthy/japy:latest .
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
-  - docker push mrtrustworthy/japy:latest
-  - echo "DONE"
+  - docker push "$DOCKERHUB_USER"/japy:latest
 
+
+before_deploy:
+  - sudo apt-get update && sudo apt-get install -y apt-transport-https
+  - curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  - echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+  - sudo apt-get update
+  - sudo apt-get install -y kubectl
+
+  - echo "$CLUSTER_CONFIG" | base64 -D > ~/.kube/config
 
