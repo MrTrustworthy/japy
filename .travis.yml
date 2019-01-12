@@ -16,8 +16,10 @@ install:
 
   - sudo apt-get update
   - sudo apt-get install -y kubectl
+
   - mkdir ~/.kube
   - echo "$CLUSTER_CONFIG" | base64 -d > ~/.kube/config
+  - kubectl config use-context "$CLUSTER_CONTEXT"
 
   - wget -O helm.tgz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.1-linux-amd64.tar.gz
   - tar -zxvf helm.tgz
@@ -27,6 +29,7 @@ install:
 script:
   - docker build -t mrtrustworthy/japy:latest .
   - echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USER" --password-stdin
-  - docker push "mrtrustworthy/japy:latest
+  - docker push mrtrustworthy/japy:latest
   - sudo helm version
+  - echo sudo helm upgrade --install japy . --set japySecrets.COOKIE="$COOKIE" --set japySecrets.DB_DBNAME="$DB_DBNAME" --set japySecrets.DB_HOST="$DB_HOST" --set japySecrets.DB_PASSWORD="$DB_PASSWORD" --set japySecrets.DB_USER="$DB_USER"
 
