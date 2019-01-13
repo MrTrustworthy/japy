@@ -1,29 +1,54 @@
-<html>
+<!doctype html>
+<html lang="en">
     <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+        <title>JaPy</title>
     </head>
 
     <body>
+        <style>
+            body {
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+            }
+            .center {
+                align-items: center;
+                display: -ms-flexbox;
+                -ms-flex-align: center;
+                margin: auto;
+            }
+        </style>
 
-        <a href="/sessions">Switch to a new session</a>
-
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-          {% endif %}
-        {% endwith %}
+        <div class="center">
 
 
-        <a>What's the character for: </a><br>
-        <a style="font-size:80px">{{ vocable }}</a>
+            <a href="/sessions">Switch to a new session</a><br><br>
 
-        <form action="/submit" autocomplete="off" method="post">
-            <input name="syllable" autocomplete="off" type="text" autofocus>
-            <input type="submit">
-        </form>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+
+
+            <a>What's the character for: </a><br>
+            <a style="font-size:80px" class="center">{{ vocable }}</a>
+
+            <form action="/submit" autocomplete="off" method="post">
+                <input name="syllable" autocomplete="off" type="text" autofocus class="center"><br><br>
+                <input type="submit" class="center">
+            </form>
+
+        </div>
     </body>
 </html>
