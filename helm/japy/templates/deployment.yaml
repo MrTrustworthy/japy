@@ -41,8 +41,10 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: 3000
+            timeoutSeconds: 10
+            periodSeconds: 60
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: 3000

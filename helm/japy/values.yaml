@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: mrtrustworthy/japy
   tag: latest
-  pullPolicy: always
+  pullPolicy: Always
 
 japySecrets:
   COOKIE: secure
@@ -22,8 +22,8 @@ fullnameOverride: ""
 
 service:
   type: LoadBalancer
-  clusterIp: 123
-  loadBalancerIp: 123
+  clusterIp: "10.35.240.200"
+  loadBalancerIp: secure
   port: 80
 
 
