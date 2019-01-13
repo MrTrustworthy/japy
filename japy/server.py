@@ -24,6 +24,8 @@ def make_user_session(vocabulary: str, charset: str, *, limit: int = None, limit
 
 def get_random_char(session_id: int, exclude: Optional[int]) -> CharacterInfo:
     chars = get_vocables_for_session(session_id)
+    if len(chars) == 0:
+        return redirect(url_for("session_landingpage"))
     char_to_use = choice(chars)
     if exclude is not None and char_to_use.id == exclude:
         return get_random_char(session_id, exclude)
