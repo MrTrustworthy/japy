@@ -30,7 +30,7 @@ def get_vocables_for_session(c, session_id: int) -> List[CharacterInfo]:
 @cursor
 def make_new_session(c) -> int:
     c.execute("""INSERT INTO sessions DEFAULT VALUES""")
-    c.execute("""SELECT last_insert_rowid()""")
+    c.execute("""SELECT currval('sessions_id_seq')""")
     return c.fetchone()[0]
 
 
