@@ -59,7 +59,7 @@ def index_handler():
 
 @app.route('/submit', methods=["POST"])
 def submit_handler():
-    guessed = request.form.get("syllable")
+    guessed = request.form.get("syllable").lower()
 
     char_id = session["current_char_id"]
     training_session_id = session["training_session_id"]
